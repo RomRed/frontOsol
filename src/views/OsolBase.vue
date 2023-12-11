@@ -126,10 +126,16 @@
                                     <InputText type="text" class="form-control" v-model="base.adresseIp" />
                                 </div>
 
+
                                 <!-- QR Code -->
                                 <div class="mb-3">
                                     <label for="qrCode" class="form-label">QR Code:</label>
                                     <InputText type="text" class="form-control" v-model="base.qrCode" />
+                                    <button @click="generateQRCode()">Generate QR Code</button>
+                                    <div class="qr-code-container">
+                                        <img :src="qrCodeImageSrc" alt="QR Code" v-if="qrCodeImageSrc">
+                                    </div>
+                                    <button @click="downloadQRCode">Télécharger QR Code</button>
                                 </div>
 
                                 <!-- Is Enable Auth Local -->
@@ -368,6 +374,37 @@ const osolbase = async () => {
         console.error('Erreur de redirection :', error);
     }
 }
+
+
+const qrCodeImageSrc = ref('');
+
+const generateQRCode = async () => {
+    try {
+        const response = await axios.get('https://api.qrserver.com/v1/create-qr-code/', {
+            params: {
+                data: base.value.qrCode,
+                size: '200x200',
+                margin: '0'
+            },
+            responseType: 'arraybuffer'
+        });
+
+        const imageSrc = URL.createObjectURL(new Blob([response.data]));
+        qrCodeImageSrc.value = imageSrc;
+    } catch (error) {
+        console.error('Erreur lors de la génération du QR code:', error);
+    }
+};
+
+
+const downloadQRCode = () => {
+    if (qrCodeImageSrc.value) {
+        const link = document.createElement('a');
+        link.href = qrCodeImageSrc.value;
+        link.download = 'qrcode.png';
+        link.click();
+    }
+};
 </script>
   
 <style>
