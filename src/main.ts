@@ -1,4 +1,4 @@
-import './assets/main.css'
+// import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -22,9 +22,27 @@ import Sidebar from 'primevue/sidebar';
 import Password from 'primevue/password';
 import Button from "primevue/button"
 import axios from 'axios';
+import Divider from 'primevue/divider';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import ColumnGroup from 'primevue/columngroup';   
+import Row from 'primevue/row';                  
+import InputSwitch from 'primevue/inputswitch';
+import MultiSelect from 'primevue/multiselect';
+
 
 const app = createApp(App);
 app.use(PrimeVue);
+app.component('MultiSelect', MultiSelect)
+app.component('InputSwitch', InputSwitch)
+app.component('DataTable', DataTable)
+app.component('Column', Column)
+app.component('ColumnGroup', ColumnGroup)
+app.component('Row', Row)
+app.component('TabView', TabView)
+app.component('TabPanel', TabPanel)
 app.component('Password', Password)
 app.component('Toast', Toast)
 app.component('Sidebar', Sidebar)
@@ -39,6 +57,7 @@ app.component('Tag', Tag);
 app.component('Login', Login)
 app.component('Dashboard', Dashboard)
 app.component('Home', Home)
+app.component('Divider', Divider)
 app.use(router)
 app.config.globalProperties.$axios = axios;
 app.mount('#app')

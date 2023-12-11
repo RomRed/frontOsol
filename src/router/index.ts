@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Home from '../views/Home.vue'
+import OsolBase from '../views/OsolBase.vue'
 import { AuthGuard } from '@/_helpers/auth-guard.js'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -15,6 +17,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/osolbase',
+      name: 'osolbase',
+      component: OsolBase, beforeEnter: AuthGuard
     },
     {
       path: '/dashboard',
