@@ -1,82 +1,84 @@
 <template>
-        <div class="grid h-full">
-            <div class="col-2">
-                <img style="width: fit-content" class="images" src="../assets/img/logoosol.png" alt="" />
-                <Divider />
-                <nav class="navbar">
-                    <ul class="list-none p-0 m-0 overflow-hidden">
-                      <li>
+<div class="grid flex flex-row flex-wrap">
+        <div class="col-12 md:col-2 colornav">
+            <img style="width: fit-content" class="images" src="../assets/img/download.svg" alt="" />
+            <Divider />
+            <nav class="navbar">
+                <ul class="list-none p-0 m-0 overflow-hidden flex flex-wrap md:flex-col">
+                    <li>
                             <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-user mr-2"></i>
-                                <span v-if="user" class="font-medium">Bienvenue <strong class="capitalize">{{ user.prenom }}</strong></span>
+                                class="flex align-items-center cursor-pointer p-3 border-round ">
+                                <i class="pi pi-user mr-2 color"></i>
+                                <span v-if="user" class="color">Bienvenue <strong class="capitalize">{{ user.prenom }}</strong></span>
                             </a>
                         </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-th-large mr-2"></i>
-                                <span  @click="dashboard" class="font-medium">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-list mr-2"></i>
-                                <span class="font-medium">List of Organisations</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-server mr-2"></i>
-                                <span  @click="osolbase" class="font-medium">List of O'Sol Base</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-home mr-2"></i>
-                                <span class="font-medium">List of O'Sol Pico</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-users mr-2"></i>
-                                <span class="font-medium">List of users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-th-large mr-2"></i>
-                                <span class="font-medium">Statisics</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-ticket mr-2"></i>
-                                <span class="font-medium">Tickets</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a v-ripple
-                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                <i class="pi pi-sign-out mr-2"></i>
-                                <span @click="logout" class="font-medium">Log Out</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-10 p-0">
-              <div>
-                
-              </div>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-th-large mr-2 color"></i>
+                            <span @click="dashboard" class=" color">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-list mr-2 color"></i>
+                            <span class=" color">List of Organisations</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-server mr-2 color"></i>
+                            <span @click="osolbase" class=" color">List of O'Sol Base</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-home mr-2 color"></i>
+                            <span class=" color">List of O'Sol Pico</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-users mr-2 color"></i>
+                            <span class=" color">List of users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-th-large mr-2 color"></i>
+                            <span class=" color">Statisics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-ticket mr-2 color"></i>
+                            <span class=" color">Tickets</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a v-ripple
+                            class="flex align-items-center cursor-pointer p-3 border-round ">
+                            <i class="pi pi-sign-out mr-2 color"></i>
+                            <span @click="logout" class=" color">Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-10 p-0">
+            <div class="card mt-5 mx-2">
+
+              
             </div>
         </div>
+    </div>
   </template>
   
   <script setup lang="ts">
@@ -124,7 +126,7 @@ const osolbase = async () => {
 }
   </script>
   
-  <style>
+  <style scoped>
 .grid1 {
     flex-direction: column;
 }
@@ -142,8 +144,44 @@ const osolbase = async () => {
     padding: 0.8rem;
 }
 
-body{
-    margin: 0;
+.colornav {
+    background-color: #40454e;
+    height: 80rem;
 }
 
+.images {
+    padding: 0.8rem;
+}
+
+
+@media (max-width: 767px) {
+    .colornav{
+        height: auto;
+    }
+    .navbar {
+        flex-direction: row;
+        height: 10%;
+    }
+
+    .navbar li {
+        margin-right: 10px;
+    }
+}
+.color {
+    color: white;
+}
+
+.navbar li a:hover {
+  background-color: #f6ce54;
+  transition-duration: 150ms;
+  transition-property: background-color;
+}
+body{
+    margin:0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: 
+#bdbdbd;
+}
 </style>

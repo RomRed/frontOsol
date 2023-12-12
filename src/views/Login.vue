@@ -119,7 +119,7 @@ fetchUsers();
 
 </script>
 
-<style>
+<style scoped >
 .image {
   box-sizing: border-box;
 }
