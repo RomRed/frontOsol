@@ -31,10 +31,29 @@ import ColumnGroup from 'primevue/columngroup';
 import Row from 'primevue/row';                  
 import InputSwitch from 'primevue/inputswitch';
 import MultiSelect from 'primevue/multiselect';
+import Checkbox from 'primevue/checkbox';
+import Message from 'primevue/message';
+import ConfirmPopup from 'primevue/confirmpopup';
+import ConfirmationService from 'primevue/confirmationservice';
+import ToastService from 'primevue/toastservice';
+import Image from 'primevue/image';
+import ScrollPanel from 'primevue/scrollpanel';
+// import 'uikit/dist/css/uikit.min.css';
+// import 'uikit/dist/js/uikit.min.js';
+// import 'uikit/dist/js/uikit-icons.min.js';
+
+
+
+
 
 
 const app = createApp(App);
 app.use(PrimeVue);
+app.component('ScrollPanel', ScrollPanel)
+app.component('Image', Image)
+app.component('ConfirmPopup', ConfirmPopup)
+app.component('Checkbox', Checkbox)
+app.component('Message', Message)
 app.component('MultiSelect', MultiSelect)
 app.component('InputSwitch', InputSwitch)
 app.component('DataTable', DataTable)
@@ -59,5 +78,7 @@ app.component('Dashboard', Dashboard)
 app.component('Home', Home)
 app.component('Divider', Divider)
 app.use(router)
+app.use(ConfirmationService);
+app.use(ToastService);
 app.config.globalProperties.$axios = axios;
 app.mount('#app')

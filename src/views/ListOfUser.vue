@@ -59,11 +59,25 @@
                 </ul>
             </nav>
         </div>
-
-        <div class="col-10 p-0">
-            <div class="card mt-5 mx-2">
-
-              
+  
+        <div class="lg:col-10  md:col-10 p-0 ">
+            <div class=" mt-5 lg:ml-2 sm:ml-3 mr-3 ">
+  
+                <TabView v-model:activeIndex="active" class="h-full ">
+                    <TabPanel class="" header="General">
+                    </TabPanel>
+                    <TabPanel header="Advanced details">
+                        <div class="card">
+                            <DataTable :value="products" tableStyle="min-width: 50rem">
+                                <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
+                                </Column>
+                            </DataTable>
+                        </div>
+                    </TabPanel>
+                    <TabPanel header="Firmware">
+  
+                    </TabPanel>
+                </TabView>
             </div>
         </div>
     </div>
@@ -72,67 +86,88 @@
   <script setup lang="ts">
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
-  const router = useRouter();
-  const user = ref<any>(null);
-
-  // Récupère le token de l'utilisateur depuis le localStorage
-  const getUserInfo = () => {
-    const userJson = localStorage.getItem('user');
-    return userJson ? JSON.parse(userJson) : null;
-  };
+  import axios from 'axios';
   
-  onMounted(() => {
-    user.value = getUserInfo();
-    console.log('User info:', user.value);
+  
+  
+  
+  const products = ref([]);
+  const columns = [
+    { field: 'idUtilisateurPico', header: 'ID' },
+    { field: 'numBadge', header: 'badge' },
+    { field: 'nom', header: 'nom' },
+    { field: 'prenom', header: 'prenom' },
+    { field: 'email', header: 'email' },
+  ];
+  
+  onMounted(async () => {
+    try {
+        // requête API pour obtenir les données pico
+        const response = await axios.get('http://localhost:8000/api');
+  
+        products.value = response.data;
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données API :', error);
+    }
   });
   
-  const logout = async () => {
-    try {
-      // Envoie une requête de déconnexion au backend 
-      // Efface le token du localStorage
-      localStorage.removeItem('token');
   
-      // Redirige vers la page de connexion
-      router.push('/login');
-    } catch (error) {
-      console.error('Erreur de déconnexion :', error);
-    }
-  };
+  const active = ref(0);
+  const tabs = ref([
+    { title: 'Tab 1', content: 'Tab 1 Content' },
+    { title: 'Tab 2', content: 'Tab 2 Content' },
+    { title: 'Tab 3', content: 'Tab 3 Content' }
+  ]);
+  const router = useRouter();
+  
   const dashboard = async () => {
     try {
         router.push('/dashboard');
     } catch (error) {
         console.error('Erreur de redirection :', error);
     }
-}
-const osolbase = async () => {
+  }
+  const logout = async () => {
+    try {
+        // Envoie une requête de déconnexion au backend 
+        // Efface le token du localStorage
+        localStorage.removeItem('token');
+  
+        // Redirige vers la page de connexion
+        router.push('/login');
+    } catch (error) {
+        console.error('Erreur de déconnexion :', error);
+    }
+  };
+  
+  const osolbase = async () => {
     try {
         router.push('/osolbase');
     } catch (error) {
         console.error('Erreur de redirection :', error);
     }
-}
-
-const isPageSpecific = document.querySelector('body');
-isPageSpecific?.classList.toggle('bodyDashboard')
-
-const toggleNavbar = () => {
+  }
+  
+  const osolpico = async () => {
+    try {
+        router.push('/osolpico');
+    } catch (error) {
+        console.error('Erreur de redirection :', error);
+    }
+  }
+  
+  
+  const toggleNavbar = () => {
     const navbar = document.querySelector('.navbar');
     if (navbar !== null) {
         navbar.classList.toggle('show');
     }
-};
+  };
+  
+  const isPageSpecific = document.querySelector('body');
+  isPageSpecific?.classList.toggle('bodyOsolbase')
 
-
-const osolpico = async () => {
-  try {
-      router.push('/osolpico');
-  } catch (error) {
-      console.error('Erreur de redirection :', error);
-  }
-}
-
-const organisations = async () => {
+  const organisations = async () => {
   try {
       router.push('/organisations');
   } catch (error) {
@@ -150,60 +185,91 @@ const pageUser = async () => {
   </script>
   
   <style>
-.grid1 {
-    flex-direction: column;
-}
-
-.col-2 {
-    background-color: #6182c0;
-    height: 100%;
-}
-
-#app>header:nth-child(2)>div>div {
-    padding: 0;
-}
-
-.images {
-    padding: 0.8rem;
-}
-
-.colornav {
+  
+  .colornav {
     background-color: #40454e;
     height: 80rem;
-}
-
-.images {
+  }
+  
+  .images {
     padding: 0.8rem;
-}
-
-
-@media (max-width: 767px) {
-    .colornav{
+  }
+  
+  @media (min-width: 768px) {
+  
+    .burger-icon {
+        display: none;
+    }
+  }
+  
+  
+  @media (max-width: 767px) {
+    .colornav {
         height: auto;
     }
-    .navbar {
+  
+    .test {
+        display: flex;
         flex-direction: row;
-        height: 10%;
     }
-
+  
+    .p-divider.p-divider-horizontal {
+        display: none;
+    }
+  
+    .navbar {
+        flex-direction: column;
+        display: none;
+    }
+  
+    .navbar.show {
+        display: flex;
+    }
+  
     .navbar li {
-        margin-right: 10px;
+        margin-right: 0;
+        width: 100%;
     }
-}
-.color {
+  
+    .burger-icon {
+        cursor: pointer;
+        color: white;
+        font-size: 1.5rem;
+        margin: 10px;
+        align-items: center;
+        display: flex;
+        margin-top: 1rem;
+    }
+  }
+  
+  .color {
     color: white;
-}
-
-.navbar li a:hover {
-  background-color: #f6ce54;
-  transition-duration: 150ms;
-  transition-property: background-color;
-}
-.bodyDashboard{
-    margin:0;
+  }
+  
+  
+  .navbar li a:hover {
+    background-color: #f6ce54;
+    transition-duration: 150ms;
+    transition-property: background-color;
+  }
+  
+  .bodyOsolbase {
+    margin: 0;
     padding: 0;
     overflow-x: hidden;
     height: 100%;
     background-color: #bdbdbd;
-}
-</style>
+  }
+  
+  .p-tabview-nav-content {
+    background-color: white;
+  }
+  
+  ul.p-tabview-nav {
+    border: none;
+  }
+  
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    border: none;
+  }
+  </style>

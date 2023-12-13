@@ -119,7 +119,7 @@ fetchUsers();
 
 </script>
 
-<style scoped >
+<style scoped>
 .image {
   box-sizing: border-box;
 }
@@ -157,4 +157,6 @@ fetchUsers();
   body {
     overflow: hidden;
   }
-}</style>
+}
+
+</style>
